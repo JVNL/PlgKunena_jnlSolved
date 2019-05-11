@@ -1,0 +1,27 @@
+/*
+ * Solved plug-in by Team Joomla!NL for Kunena 5
+ * Website: http://www.joomlanl.nl/
+ * License: GNU General Public License version 2 or later
+ * Developer: JulianK92 (http://www.julian.wtf/)
+*/
+
+.jnlSolvedSolutionPost div.row-fluid .vertical-message {
+	background-color: #f2fae3 ;
+}
+
+p.oplossing {
+	font-weight: bold;
+	color: #1E824C;
+	margin: 14px;
+}
+
+div.modal, #kunena.layout .kmessage {
+    background-color: transparent!important;
+}
+
+#kunena.layout .kmessage .kmessage-right {
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    margin-left: 0;
+}

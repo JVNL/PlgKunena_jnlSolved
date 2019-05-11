@@ -1,0 +1,46 @@
+<!-- Modal Close solved topic -->
+<div class="modal fade" id="topicSolvedModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Notificatie</h4>
+            </div>
+            <div class="modal-body">
+                <p>Voordat je het topic sluit, is het van belang dat je de juiste reactie als oplossing markeert. Indien je het niet zeker weet, klik dan eerst op het kruisje en druk daarna onder de reactie met de oplossing op "Opgelost".</p>
+                <p>Dit is van belang omdat bezoekers dan weten in welke reactie de oplossing van het topic staat vermeld. Als er geen oplossing in het topic staat, geef dan in het topic aan dat het gesloten mag worden.</p>
+            </div>
+            <div class="modal-footer">
+                <div class="checkbox">
+                    <label class="pull-left"><input type="checkbox" id="cbCorrectMarked">Ja, ik heb de juiste oplossing gemarkeerd.</label>
+                </div>
+                <button type="button" class="btn btn-success" id="btnCloseModal">Sluit topic</button>
+            </div>
+        </div>
+  
+    </div>
+</div>
+
+<!-- Modal Reopen solved topic -->
+<div class="modal fade" id="topicReopenModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Notificatie</h4>
+            </div>
+            <div class="modal-body">
+                <p>Weet je zeker dat je [opgelost] ongedaan wilt maken, en het topic wilt heropenen.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success PLG_KUNENA_JNLSOLVED_YES" id="btnReopenModal" data-dismiss="modal"></button>
+                <button type="button" class="btn btn-danger PLG_KUNENA_JNLSOLVED_NO" data-dismiss="modal"></button>
+            </div>
+        </div>
+  
+    </div>
+</div>
