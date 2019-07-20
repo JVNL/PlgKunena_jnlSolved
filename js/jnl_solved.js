@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	// click event solution button, set completion link
 	jQuery(".jnlSolvedBtn").on('click', function(event) {
 		var berichtId = jQuery(event.currentTarget).attr("data-berichtid"); // message id
-		console.log("Message id: " + berichtId + ", Topic id: " + topicId + ", Category id: " + categorieId);
 		closelink = "index.php?option=com_kunena&view=topic&jnltask=solved&berid=" + berichtId + "&catid=" + categorieId + "&id=" + topicId;
 	});
 

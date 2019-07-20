@@ -54,7 +54,10 @@ class jnlPlgSolvedAuth extends JPlugin
 			// topic starter premitted to see the solved button?
 			if((int)$topicData['posts'] >= 2)
 			{
-				if((($lastPostUser) && ((int)$topicData['first_post_userid'] === $userId) && ((int)$topicData['last_post_userid'] === $userId)) || (($lastPostUser === 0) && ((int)$topicData['first_post_userid'] === $userId)))
+				$fUid = (int)$topicData['first_post_userid'];
+				$lUid = (int)$topicData['last_post_userid'];
+				
+				if($fUid === $userId && (($lastPostUser && $lUid === $userId) || !$lastPostUser))
 					return true;
 			}
 		}
@@ -68,10 +71,7 @@ class jnlPlgSolvedAuth extends JPlugin
 	{
 		$JInput = JFactory::getApplication()->input;
 		$User = JFactory::getUser();
-		
-		$topicId = $JInput->getInt('id', 0);
 		$catId = $JInput->getInt('catid', 0);
-		
 		$kunenaAccess = KunenaAccess::getInstance();
 		
 		if($kunenaAccess->isAdmin($User, $catId) || $kunenaAccess->isModerator($User, $catId))

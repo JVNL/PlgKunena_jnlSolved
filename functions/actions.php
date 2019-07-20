@@ -22,7 +22,7 @@ class jnlPlgSolvedActions extends JPlugin
 		$topicData = jnlPlgSolvedActions::GetTopicData($topicId);
 		if($topicData != null)
 		{
-			if(stripos($topicData['subject'], $topicSolvedText) !== false || (bool)$topicData['locked'])
+			if(stripos($topicData['subject'], $topicSolvedText) || (bool)$topicData['locked'])
 			{
 				if(jnlPlgSolvedAuth::IsAdminOrModerator())
 				{

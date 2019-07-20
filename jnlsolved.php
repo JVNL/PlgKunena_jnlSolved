@@ -61,7 +61,7 @@ class plgKunenaJnlSolved extends JPlugin
 		$callback = KunenaRoute::_('index.php?option=com_kunena&view=topic&catid=' . $catId . '&id=' . $topicId . '#' . $messageId);
 		
 		// is kunena openend or was there a given task?
-		if(($app !=='com_kunena') || ($task !== 'reopen' && $task !== 'solved'))
+		if(($app !== 'com_kunena') || ($task !== 'reopen' && $task !== 'solved'))
 			return;
 		
 		// topic and category-id given?
@@ -69,7 +69,7 @@ class plgKunenaJnlSolved extends JPlugin
 			return;
 		
 		// user authorized to perform solved action?
-		if(jnlPlgSolvedAuth::IsUserAuthorized($enableForAdmins, $enableForModerators, $enableForTopicStarter, $lastPostUser, $topicSolvedText) === false)
+		if(!jnlPlgSolvedAuth::IsUserAuthorized($enableForAdmins, $enableForModerators, $enableForTopicStarter, $lastPostUser, $topicSolvedText))
 			return;
 		
 		// okay what do you want to do :P
@@ -124,14 +124,14 @@ class plgKunenaJnlSolved extends JPlugin
 		jnlPlgSolvedActions::SetSolvedElement($topicId, $catId);
 	
 		// user authorized to see/use solved button?
-		if(jnlPlgSolvedAuth::IsUserAuthorized($enableForAdmins, $enableForModerators, $enableForTopicStarter, $lastPostUser, $topicSolvedText) === false)
+		if(!jnlPlgSolvedAuth::IsUserAuthorized($enableForAdmins, $enableForModerators, $enableForTopicStarter, $lastPostUser, $topicSolvedText))
 			return;
 	
 		// get topicdata
 		$topicData = jnlPlgSolvedActions::GetTopicData($topicId);
 	
 		// topic already marked as solved?
-		if(stripos($topicData['subject'], $topicSolvedText) !== false || (bool)$topicData['locked'])
+		if((stripos($topicData['subject'], $topicSolvedText) || (bool)$topicData['locked']) && jnlPlgSolvedAuth::IsAdminOrModerator())
 			jnlPlgSolvedButtons::AddReopenButton();
 		else
 			jnlPlgSolvedButtons::AddSolutionButton($solvedButtonText);
