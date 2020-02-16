@@ -21,16 +21,16 @@ class jnlPlgSolvedAuth extends JPlugin
 		
 		$userId = (int)$User->id;
 		$topicId = $JInput->getInt('id', 0);
-		$catId = $JInput->getInt('catid', 0);
+		$categoryId = $JInput->getInt('categoryId', 0);
 		
-		if(empty($userId) || empty($topicId) || empty($catId))
+		if(empty($userId) || empty($topicId) || empty($categoryId))
 			return false;
 
 		$kunenaAccess = KunenaAccess::getInstance();
 
-		if($enableForAdmins && $kunenaAccess->isAdmin($User, $catId))
+		if($enableForAdmins && $kunenaAccess->isAdmin($User, $categoryId))
 			return true;
-		elseif($enableForModerators && $kunenaAccess->isModerator($User, $catId))
+		elseif($enableForModerators && $kunenaAccess->isModerator($User, $categoryId))
 			return true;
 		
 		//before wasting more time, is topicstarter premited to see the solved button?
@@ -71,10 +71,10 @@ class jnlPlgSolvedAuth extends JPlugin
 	{
 		$JInput = JFactory::getApplication()->input;
 		$User = JFactory::getUser();
-		$catId = $JInput->getInt('catid', 0);
+		$categoryId = $JInput->getInt('categoryId', 0);
 		$kunenaAccess = KunenaAccess::getInstance();
 		
-		if($kunenaAccess->isAdmin($User, $catId) || $kunenaAccess->isModerator($User, $catId))
+		if($kunenaAccess->isAdmin($User, $categoryId) || $kunenaAccess->isModerator($User, $categoryId))
 			return true;
 		return false;
 	}
