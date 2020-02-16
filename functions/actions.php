@@ -92,7 +92,7 @@ class jnlPlgSolvedActions extends JPlugin
 	/*
 	* Method which makes a HTML element for the topic with solved data.
 	*/
-	public static function SetSolvedElement($topicId, $catId)
+	public static function SetSolvedElement($topicId, $categoryId)
 	{
 		$Dbo = JFactory::getDBO();
 
@@ -105,7 +105,7 @@ class jnlPlgSolvedActions extends JPlugin
 		$solutionId = $topicData["mesid"] ? $topicData["mesid"] : 0;
 
 		$regex = '#<head>.*</head>#Us';
-		$element = " <span id='jnlSolvedData' data-solutionpost='".$solutionId."' data-categoryid='".$catId."' data-topicid='".$topicId."'><span/>";
+		$element = " <span id='jnlSolvedData' data-solutionpost='" . $solutionId . "' data-categoryid='" . $categoryId . "' data-topicid='" . $topicId . "'><span/>";
 		jnlPlgSolvedHtmlHandler::PutOnPage($regex, $element);
 	}
 }

@@ -46,9 +46,9 @@ class plgKunenaJnlSolved extends JPlugin
 		
 		$app = $JInput->getString('option', null);
 		$task = $JInput->getString('jnltask', null);
-		$messageId = $JInput->getInt('berid', 0);
+		$messageId = $JInput->getInt('messageId', 0);
 		$topicId = $JInput->getInt('id', 0);
-		$catId = $JInput->getInt('catid', 0);
+		$categoryId = $JInput->getInt('categoryId', 0);
 		
 		$enableForAdmins = (bool)$this->params->get('enable_for_admin', 0);
 		$enableForModerators = (bool)$this->params->get('enable_for_moderator', 0);
@@ -58,14 +58,14 @@ class plgKunenaJnlSolved extends JPlugin
 		
 		$renameTopic = (bool)$this->params->get('topic_solved_rename', 1);
 		$lockSolved = (bool)$this->params->get('lock_solved', 1);
-		$callback = KunenaRoute::_('index.php?option=com_kunena&view=topic&catid=' . $catId . '&id=' . $topicId . '#' . $messageId);
+		$callback = KunenaRoute::_('index.php?option=com_kunena&view=topic&categoryId=' . $categoryId . '&id=' . $topicId . '#' . $messageId);
 		
 		// is kunena openend or was there a given task?
 		if(($app !== 'com_kunena') || ($task !== 'reopen' && $task !== 'solved'))
 			return;
 		
 		// topic and category-id given?
-		if(empty($topicId) || empty($catId))
+		if(empty($topicId) || empty($categoryId))
 			return;
 		
 		// user authorized to perform solved action?
@@ -93,7 +93,7 @@ class plgKunenaJnlSolved extends JPlugin
 		
 		$app = $JInput->getString('option', null);
 		$view = $JInput->getString('view', null);
-		$catId = $JInput->getInt('catid', 0);
+		$categoryId = $JInput->getInt('categoryId', 0);
 		$topicId = $JInput->getInt('id', 0);
 		$document = JFactory::getDocument();
 		$doctype = $document->getType();
@@ -113,7 +113,7 @@ class plgKunenaJnlSolved extends JPlugin
 			return;
 	
 		// category-id and topic-id given?
-		if(empty($catId) || empty($topicId))
+		if(empty($categoryId) || empty($topicId))
 			return;
 	
 		// html view?
@@ -121,7 +121,7 @@ class plgKunenaJnlSolved extends JPlugin
 			return;
 		
 		// set solved data HTML element
-		jnlPlgSolvedActions::SetSolvedElement($topicId, $catId);
+		jnlPlgSolvedActions::SetSolvedElement($topicId, $categoryId);
 	
 		// user authorized to see/use solved button?
 		if(!jnlPlgSolvedAuth::IsUserAuthorized($enableForAdmins, $enableForModerators, $enableForTopicStarter, $lastPostUser, $topicSolvedText))
