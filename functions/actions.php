@@ -8,10 +8,12 @@
 
 defined('_JEXEC') or die();
 
+use Joomla\CMS\Plugin\CMSPlugin;
+
 require_once('auth.php');
 require_once('htmlHandler.php');
 
-class jnlPlgSolvedActions extends JPlugin
+class jnlPlgSolvedActions extends CMSPlugin
 {
 	/*
 	* Method to reopen a topic which has been marked as solved.
@@ -102,7 +104,7 @@ class jnlPlgSolvedActions extends JPlugin
 		$Dbo->execute();
 
 		$topicData = $Dbo->loadAssoc();
-		$solutionId = $topicData["mesid"] ? $topicData["mesid"] : 0;
+		$solutionId = $topicData != null && $topicData["mesid"] != null ? $topicData["mesid"] : 0;
 
 		$regex = '#<head>.*</head>#Us';
 		$element = " <span id='jnlSolvedData' data-solutionpost='" . $solutionId . "' data-categoryid='" . $categoryId . "' data-topicid='" . $topicId . "'><span/>";

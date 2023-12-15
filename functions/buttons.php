@@ -8,37 +8,43 @@
 
 defined('_JEXEC') or die();
 
+use Joomla\CMS\Factory;
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Application\WebApplication;
+use Joomla\Filesystem\File;
+
 require_once('htmlHandler.php');
 
-//TODO: Check if some of this can be replaced by JavaScript.
-
-class jnlPlgSolvedButtons
+class jnlPlgSolvedButtons extends CMSPlugin
 {
 	public static function AddReopenButton()
 	{
-		$buttonCode = JFile::read(JPATH_PLUGINS . '/kunena/jnlsolved/template/button_reopen.html');
-		if(empty($buttonCode))
+		$buttonCode = file_get_contents(JPATH_PLUGINS . '/kunena/jnlsolved/template/button_reopen.html');
+		if(empty($buttonCode)) {
 			return;
+		}
 
-		$regex = '#<div class="btn-toolbar btn-marging">.*</div>#Us';
+		$regex = '#<div class="btn-toolbar btn-marging kmessagepadding">.*</div>#Us';
 		jnlPlgSolvedHtmlHandler::PutOnPage($regex, $buttonCode);
 	}
 
 	public static function AddSolutionButton($solvedButtonText)
 	{
-		$buttonCode = JFile::read(JPATH_PLUGINS . '/kunena/jnlsolved/template/button_solved.html');
-		if(empty($buttonCode))
+		$buttonCode = file_get_contents(JPATH_PLUGINS . '/kunena/jnlsolved/template/button_solved.html');
+		if(empty($buttonCode)) {
 			return;
-
-		$regex = '#<div class="btn-toolbar btn-marging">.*</div>#Us';
+		}
+		
+		$regex = '#<div class="btn-toolbar btn-marging kmessagepadding">.*</div>#Us';
 		jnlPlgSolvedHtmlHandler::PutOnPage($regex, $buttonCode);
 	}
 
 	public static function AddModalElements()
 	{
-		$modalCode = JFile::read(JPATH_PLUGINS . '/kunena/jnlsolved/template/modal.html');
-		if(empty($modalCode))
+		$modalCode = file_get_contents(JPATH_PLUGINS . '/kunena/jnlsolved/template/modal.html');
+		if(empty($modalCode)) {
 			return;
+		}
 
 		$regex = '#<head>.*</head>#Us';
 		jnlPlgSolvedHtmlHandler::PutOnPage($regex, $modalCode);

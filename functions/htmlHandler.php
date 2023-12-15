@@ -8,22 +8,23 @@
 
 defined('_JEXEC') or die();
 
-class jnlPlgSolvedHtmlHandler extends JPlugin
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Application\WebApplication;
+
+class jnlPlgSolvedHtmlHandler extends CMSPlugin
 {
 	public static function PutOnPage($regex, $element)
 	{
-		$body = JResponse::getBody();
+		$body = JFactory::getApplication()->getBody();
 
 		preg_match_all($regex, $body, $matches);
-		if(empty($matches[0]))
+		if(empty($matches[0])) {
 			return;
-		else
-		{
-			foreach($matches[0] as $originalText)
-			{
+		} else {
+			foreach($matches[0] as $originalText) {
 				$body = str_replace($originalText, $originalText . $element, $body);
 			}
 		}
-		JResponse::setBody($body);
+		JFactory::getApplication()->setBody($body);
 	}
 }

@@ -5,18 +5,9 @@
  * Developer: JulianK92 (http://www.julian.wtf/)
 */
 
-.jnlSolvedSolutionPost div.row-fluid {
-	background-color: #f2fae3 ;
-}
-
-p.solutionPost {
+.solutionPost {
 	font-weight: bold;
 	color: #1E824C;
-	margin: 14px;
-}
-
-div.modal, #kunena.layout .kmessage {
-    background-color: transparent!important;
 }
 
 #kunena.layout .kmessage .kmessage-right {
@@ -24,4 +15,8 @@ div.modal, #kunena.layout .kmessage {
     padding-bottom: 20px;
     padding-right: 20px;
     margin-left: 0;
+}
+
+.jnlSolvedSolutionPost {
+	background-color: #f2fae3 !important;
 }

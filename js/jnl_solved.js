@@ -4,65 +4,60 @@
 // Developer: JulianK92 (http://www.julian.wtf/)
 
 'use strict';
+document.addEventListener('DOMContentLoaded', function() {
+	var closelink = location.href;
+	var solutionId = document.querySelector("#jnlSolvedData").attributes["data-solutionpost"].value;	// can be 0, if so topic has no solution
+	var topicId = jQuery("#jnlSolvedData").data("topicid");
+	var categorieId = jQuery("#jnlSolvedData").data("categoryid");
+	
+	// add correct message (forum posts) id's to solved button
+	var jnlSolvedBtns = document.querySelectorAll('.jnlSolvedBtn');
+	jnlSolvedBtns.forEach(function(btn) {
+		var kmessage = btn.closest('.kmessage');
+		var idElement = kmessage.querySelector('.kmsg-id');
+		var id = idElement.getAttribute('id');
+		jQuery(btn).attr('data-message-id', id);
+	});
 
-function attachLanguageStrings() {
-	jQuery(".PLG_KUNENA_JNLSOLVED_BUTTON_REOPEN_TEXT").text(Joomla.JText._('PLG_KUNENA_JNLSOLVED_BUTTON_REOPEN_TEXT'));
-	jQuery(".PLG_KUNENA_JNLSOLVED_BUTTON_SOLVED_TEXT").text(Joomla.JText._('PLG_KUNENA_JNLSOLVED_BUTTON_SOLVED_TEXT'));
-	jQuery(".PLG_KUNENA_JNLSOLVED_YES").text(Joomla.JText._('JYES'));
-	jQuery(".PLG_KUNENA_JNLSOLVED_NO").text(Joomla.JText._('JNO'));
-}
-
-function markSolution(solutionId) {
+	// mark the solution
 	if(solutionId > 0) {
-		jQuery(".vertical-layout-message").find(".kmessage-post-header a").each(function(key, value) {
-			if(solutionId === parseInt(jQuery(value).attr("id"))) {
-				var solutionPost = jQuery(value).closest(".vertical-layout-message");
-				jQuery(solutionPost).addClass("jnlSolvedSolutionPost");
-				jQuery(solutionPost).find(".kmessage").prepend("<p class='solutionPost'>" + Joomla.JText._('PLG_KUNENA_JNLSOLVED_SOLUTION_POST_TEXT') + "</p>");
+		var kmessages = document.querySelectorAll('.kmessage');
+		kmessages.forEach(function(kmessage) {
+			var idElement = kmessage.querySelector('.kmsg-id');
+			var id = idElement.getAttribute('id');
+			if(solutionId === id) {
+				kmessage.classList.add("jnlSolvedSolutionPost");
+				var body = kmessage.querySelector(".kmsg-body");
+				body.innerHTML = "<p class='solutionPost'>Deze post is als oplossing voor dit topic aangewezen:</p>" + body.innerHTML;
 			}
 		});
 	}
-}
 
-function attachMessageIdToSolvedButton() {
-	jQuery(".jnlSolvedBtn").each(function(key, value){
-		var id = jQuery(value).closest(".vertical-layout-message").find(".kmessage-post-header a").attr('id');
-		jQuery(value).attr('data-message-id', id);
-	});
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-	var closeLink = location.href; 
-	var solutionId = jQuery("#jnlSolvedData").data("solutionpost"); // can be 0, if so topic has no solution
-	var topicId = jQuery("#jnlSolvedData").data("topicid");
-	var categoryId = jQuery("#jnlSolvedData").data("categoryid");
-
-	attachLanguageStrings();
-	markSolution(solutionId);
-	attachMessageIdToSolvedButton();
-
-	// Attach click event checkbox
+	// click event checkbox
 	jQuery("#cbCorrectMarked").on('change', function() {
-		if(jQuery("#cbCorrectMarked:checked").length === 1)
+		if(jQuery("#cbCorrectMarked:checked").length === 1) {
 			jQuery("#btnCloseModal").attr("data-dismiss", "modal").addClass("jnlSolvedCloseable");
-		else
+		} else {
 			jQuery("#btnCloseModal").removeAttr("data-dismiss").removeClass("jnlSolvedCloseable");
+		}
 	});
 
-	// Attach click event solution button, set completion link
+	// click event solution button, set completion link
 	jQuery(".jnlSolvedBtn").on('click', function(event) {
-		var messageId = jQuery(event.currentTarget).attr("data-message-id"); // message id
-		closeLink = "index.php?option=com_kunena&view=topic&jnltask=solved&messageId=" + messageId + "&categoryId=" + categoryId + "&id=" + topicId;
+		var berichtId = jQuery(event.currentTarget).attr("data-message-id"); // message id
+		//console.log("Message id: " + berichtId + ", Topic id: " + topicId + ", Category id: " + categorieId);
+		closelink = window.location.origin + window.location.pathname + "?option=com_kunena&view=topic&jnltask=solved&berid=" + berichtId + "&catid=" + categorieId + "&id=" + topicId;
 	});
 
-	// Attach click event modal element, if solved
+	// click event modal element, if solved
 	jQuery("#btnCloseModal").on('click', function() {
-		if(jQuery(this).hasClass("jnlSolvedCloseable"))
-			location.href = closeLink;
+		if(jQuery(this).hasClass("jnlSolvedCloseable")) {
+			location.href = closelink;
+		}
 	});
 	
-	// Attach click event reopen topic
+	// click event reopen topic
 	jQuery("#btnReopenModal").on('click', function(event) {
-		window.location = "index.php?option=com_kunena&view=topic&jnltask=reopen&categoryId=" + categoryId + "&id=" + topicId;
+		window.location = window.location.origin + window.location.pathname + "?option=com_kunena&view=topic&jnltask=reopen&catid=" + categorieId + "&id=" + topicId;
 	});
 });

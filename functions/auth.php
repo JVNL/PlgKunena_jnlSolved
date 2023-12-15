@@ -8,7 +8,14 @@
 
 defined('_JEXEC') or die();
 
-class jnlPlgSolvedAuth extends JPlugin
+use Joomla\CMS\Factory;
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Application\WebApplication;
+use Joomla\CMS\User\User;
+use Joomla\CMS\Input\Input;
+use Kunena\Forum\Libraries\Access\KunenaAccess;
+
+class jnlPlgSolvedAuth extends CMSPlugin
 {
 	/*
 	* Method to check if the user is authorized to use the plugin.
@@ -21,17 +28,19 @@ class jnlPlgSolvedAuth extends JPlugin
 		
 		$userId = (int)$User->id;
 		$topicId = $JInput->getInt('id', 0);
-		$categoryId = $JInput->getInt('categoryId', 0);
+		$categoryId = $JInput->getInt('catid', 0);
 		
-		if(empty($userId) || empty($topicId) || empty($categoryId))
+		if(empty($userId) || empty($topicId) || empty($categoryId)) {
 			return false;
+		}
 
 		$kunenaAccess = KunenaAccess::getInstance();
 
-		if($enableForAdmins && $kunenaAccess->isAdmin($User, $categoryId))
+		if($enableForAdmins && $kunenaAccess->isAdmin($User, $categoryId)) {
 			return true;
-		elseif($enableForModerators && $kunenaAccess->isModerator($User, $categoryId))
+		} elseif($enableForModerators && $kunenaAccess->isModerator($User, $categoryId)) {
 			return true;
+		}
 		
 		//before wasting more time, is topicstarter premited to see the solved button?
 		if ($enableForTopicStarter) {
@@ -44,12 +53,14 @@ class jnlPlgSolvedAuth extends JPlugin
 			$topicData = $Dbo->loadAssoc();
 			
 			// topic already marked as [solved]?
-			if(stripos($topicData['subject'], $topicSolvedText) !== false)
+			if(stripos($topicData['subject'], $topicSolvedText) !== false) {
 				return false;
+			}
 			
 			// topic locked?
-			if((bool)$topicData['locked'])
+			if((bool)$topicData['locked']) {
 				return false;
+			}
 			
 			// topic starter premitted to see the solved button?
 			if((int)$topicData['posts'] >= 2)
@@ -57,8 +68,9 @@ class jnlPlgSolvedAuth extends JPlugin
 				$fUid = (int)$topicData['first_post_userid'];
 				$lUid = (int)$topicData['last_post_userid'];
 				
-				if($fUid === $userId && (($lastPostUser && $lUid === $userId) || !$lastPostUser))
+				if($fUid === $userId && (($lastPostUser && $lUid === $userId) || !$lastPostUser)) {
 					return true;
+				}
 			}
 		}
 		return false;
@@ -71,11 +83,13 @@ class jnlPlgSolvedAuth extends JPlugin
 	{
 		$JInput = JFactory::getApplication()->input;
 		$User = JFactory::getUser();
-		$categoryId = $JInput->getInt('categoryId', 0);
+		$categoryId = $JInput->getInt('catid', 0);
 		$kunenaAccess = KunenaAccess::getInstance();
 		
-		if($kunenaAccess->isAdmin($User, $categoryId) || $kunenaAccess->isModerator($User, $categoryId))
+		if($kunenaAccess->isAdmin($User, $categoryId) || $kunenaAccess->isModerator($User, $categoryId)) {
 			return true;
+		}
+
 		return false;
 	}
 }
