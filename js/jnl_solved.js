@@ -1,4 +1,4 @@
-// Solved plug-in by Team Joomla!NL for Kunena 5
+// Solved plug-in by Team Joomla!NL for Kunena 6
 // Website: http://www.joomlanl.nl/
 // License: GNU General Public License version 3 or later
 // Developer: JulianK92 (http://www.julian.wtf/)
@@ -6,7 +6,12 @@
 'use strict';
 document.addEventListener('DOMContentLoaded', function() {
 	var closelink = location.href;
-	var solutionId = document.querySelector("#jnlSolvedData").attributes["data-solutionpost"].value;	// can be 0, if so topic has no solution
+
+	if (document.querySelector("#jnlSolvedData") == null) {
+		return;
+	}
+	
+	var solutionId = document.querySelector("#jnlSolvedData").attributes["data-solutionpost"].value; // can be 0, if so topic has no solution
 	var topicId = jQuery("#jnlSolvedData").data("topicid");
 	var categorieId = jQuery("#jnlSolvedData").data("categoryid");
 	

@@ -33,8 +33,8 @@ class plgKunenaJnlSolved extends CMSPlugin
 		parent::__construct ($subject, $config);
 		
 		$document = JFactory::getDocument();
-		$document->addStyleSheet(JURI::root() . '/plugins/kunena/jnlsolved/css/style_solved.css');
-		$document->addScript(JURI::root() . '/plugins/kunena/jnlsolved/js/jnl_solved.js');
+		$document->addStyleSheet(JURI::root() . 'plugins/kunena/jnlsolved/css/style_solved.css?v=1.0.0');
+		$document->addScript(JURI::root() . 'plugins/kunena/jnlsolved/js/jnl_solved.js?v=1.0.0');
 	}
 	
 	public function onBeforeRender()
