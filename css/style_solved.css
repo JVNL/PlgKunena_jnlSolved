@@ -1,0 +1,26 @@
+/*
+ * Solved plug-in by Team Joomla!NL for Kunena 6
+ * Website: https://www.joomlanl.nl/
+ * License: GNU General Public License version 3 or later
+ */
+
+.solutionPost {
+	font-weight: bold;
+	color: #1E824C;
+}
+
+#kunena.layout .kmessage .kmessage-right {
+	padding-left: 20px;
+	padding-bottom: 20px;
+	padding-right: 20px;
+	margin-left: 0;
+}
+
+.jnlSolvedSolutionPost {
+	background-color: #f2fae3 !important;
+}
+
+.jnlSolvedBtn,
+.jnlReopenBtn {
+	margin-left: 4px;
+}
