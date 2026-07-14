@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+	<update>
+		<name>PLG_KUNENA_JNLSOLVED</name>
+		<description>PLG_KUNENA_JNLSOLVED_DESCRIPTION</description>
+		<element>jnlsolved</element>
+		<type>plugin</type>
+		<folder>kunena</folder>
+		<client>site</client>
+		<version>2.0.0</version>
+		<infourl title="Joomla!NL - Opgelost plugin">https://github.com/JVNL/PlgKunena_jnlSolved</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/JVNL/PlgKunena_jnlSolved/releases/download/2.0.0/jnlsolved.zip</downloadurl>
+		</downloads>
+		<tags>
+			<tag>stable</tag>
+		</tags>
+		<maintainer>Team Joomla!NL</maintainer>
+		<maintainerurl>https://www.joomlanl.nl</maintainerurl>
+		<targetplatform name="joomla" version="5.[0-9]+" />
+	</update>
+</updates>
