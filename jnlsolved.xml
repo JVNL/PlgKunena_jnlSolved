@@ -70,6 +70,6 @@
 		</fields>
 	</config>
 	<updateservers>
-		<server type="extension" name="jnlsolved" priority="1">https://raw.githubusercontent.com/JVNL/PlgKunena_jnlSolved/master/versioninfo.xml</server>
+		<server type="extension" name="Joomla!NL - Opgelost plugin" priority="1">https://raw.githubusercontent.com/JVNL/PlgKunena_jnlSolved/master/versioninfo.xml</server>
 	</updateservers>
 </extension>
