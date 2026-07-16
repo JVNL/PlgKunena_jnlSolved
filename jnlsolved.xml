@@ -2,8 +2,8 @@
 <!DOCTYPE extension>
 <extension version="4.0" type="plugin" group="kunena" method="upgrade">
 	<name>PLG_KUNENA_JNLSOLVED</name>
-	<version>2.0.0</version>
-	<creationDate>14-07-2026</creationDate>
+	<version>2.0.1</version>
+	<creationDate>16-07-2026</creationDate>
 	<author>Team Joomla!NL</author>
 	<authorEmail>info@joomlanl.nl</authorEmail>
 	<authorUrl>https://www.joomlanl.nl</authorUrl>
